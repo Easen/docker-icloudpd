@@ -720,30 +720,5 @@ then
    fi
 fi
 
-# Check for updates
-log_info_n " - Checking for updates: "
-current_version="$(awk -F_ '{print $1}' /opt/build_version.txt)"
-latest_version="$(curl --silent --max-time 5 https://raw.githubusercontent.com/boredazfcuk/docker-icloudpd/master/build_version.txt | awk -F_ '{print $1}')"
-if [ "${current_version:=99}" -eq "99" ] || [ "${latest_version:=98}" -eq "98" ]
-then
-   echo "Check for updates failed. Placeholder version detected. Current version: ${current_version}. Latest version: ${latest_version}"
-   user_warning_displayed=true
-   sleep 1m
-elif [ "${current_version}" -lt "${latest_version}" ]
-then
-   echo "Current version (v${current_version}) is out of date. Please upgrade to latest version (v${latest_version})."
-   user_warning_displayed=true
-   sleep 1m
-elif [ "${current_version}" -gt "${latest_version}" ]
-then
-   echo "Current version (v${current_version}) is newer than latest build (v${latest_version}). Good luck!"
-elif [ "${current_version}" -eq "${latest_version}" ]
-then
-   echo "Current version (v${current_version}) is up to date"
-else
-   echo "Check for updates failed. Cannot continue. Halting"
-   sleep infinity
-fi
-
 log_info "Initialisation complete"
 exec /usr/local/bin/sync-icloud.sh
