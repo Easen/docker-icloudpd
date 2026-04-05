@@ -3,9 +3,10 @@ LABEL maintainer="boredazfcuk"
 
 ENV XDG_DATA_HOME="/config" TZ="UTC" ENV="/etc/profile" config_file="/config/icloudpd.conf"
 
-ARG icloudpd_version="1.32.2"
+ARG icloudpd_git="https://github.com/icloud-photos-downloader/icloud_photos_downloader"
+ARG icloudpd_commit="v1.32.2"
 ARG build_dependencies="gcc python3-dev libc-dev libffi-dev cargo openssl-dev"
-ARG app_dependencies="findutils nano nano-syntax py3-pip exiftool coreutils tzdata curl libheif imagemagick shadow jq jpeg bind-tools expect inotify-tools msmtp"
+ARG app_dependencies="findutils nano nano-syntax py3-pip exiftool coreutils tzdata curl libheif imagemagick shadow jq jpeg bind-tools expect inotify-tools msmtp git"
 
 RUN echo "$(date '+%d/%m/%Y - %H:%M:%S') | ***** Build started for boredazfcuk's docker-icloudpd *****" && \
 echo "$(date '+%d/%m/%Y - %H:%M:%S') | Install requirements" && \
@@ -16,7 +17,7 @@ echo "$(date '+%d/%m/%Y - %H:%M:%S') | Install iCloudPD latest release" && \
    python -m venv /opt/icloudpd && \
    source /opt/icloudpd/bin/activate && \
    pip3 install --upgrade pip && \
-   pip3 install --no-cache-dir icloudpd=="${icloudpd_version}" && \
+   pip3 install --no-cache-dir icloudpd@git+${icloudpd_git}@${icloudpd_commit} && \
    deactivate && \
    apk del build
 
