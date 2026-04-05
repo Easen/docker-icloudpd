@@ -8,8 +8,12 @@
     [
       "@semantic-release/commit-analyzer",
       {
-        "preset": "angular",
+        "preset": "conventionalcommits",
         "releaseRules": [
+          {
+            "breaking": true,
+            "release": "major"
+          },
           {
             "type": "feat",
             "release": "minor"
@@ -19,11 +23,11 @@
             "release": "patch"
           },
           {
-            "type": "perf",
+            "type": "build",
             "release": "patch"
           },
           {
-            "type": "docs",
+            "type": "perf",
             "release": "patch"
           },
           {
@@ -31,23 +35,70 @@
             "release": "patch"
           },
           {
-            "type": "style",
+            "type": "revert",
             "release": "patch"
           },
           {
-            "type": "build",
-            "release": "patch"
+            "type": "style",
+            "release": false
+          },
+          {
+            "type": "test",
+            "release": false
           }
-        ],
-        "parserOpts": {
-          "noteKeywords": [
-            "BREAKING CHANGE",
-            "BREAKING CHANGES"
+        ]
+      }
+    ],
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "preset": "conventionalcommits",
+        "presetConfig": {
+          "types": [
+            {
+              "type": "feat",
+              "section": "Features"
+            },
+            {
+              "type": "fix",
+              "section": "Bug Fixes"
+            },
+            {
+              "type": "perf",
+              "section": "Performance Improvements"
+            },
+            {
+              "type": "refactor",
+              "section": "Code Refactoring"
+            },
+            {
+              "type": "docs",
+              "section": "Documentation"
+            },
+            {
+              "type": "style",
+              "section": "Styles"
+            },
+            {
+              "type": "test",
+              "section": "Tests"
+            },
+            {
+              "type": "build",
+              "section": "Build System"
+            },
+            {
+              "type": "ci",
+              "section": "Continuous Integration"
+            },
+            {
+              "type": "*",
+              "section": "Other Changes"
+            }
           ]
         }
       }
     ],
-    "@semantic-release/release-notes-generator",
     "@semantic-release/github"
   ]
 }
