@@ -3,8 +3,9 @@ LABEL maintainer="boredazfcuk"
 
 ENV XDG_DATA_HOME="/config" TZ="UTC" ENV="/etc/profile" config_file="/config/icloudpd.conf"
 
-ARG icloudpd_git="https://github.com/icloud-photos-downloader/icloud_photos_downloader"
-ARG icloudpd_commit="v1.32.2"
+# https://github.com/icloud-photos-downloader/icloud_photos_downloader/pull/1327
+ARG icloudpd_git="https://github.com/myMartek/icloud_photos_downloader"
+ARG icloudpd_commit="d9c77d7891def29132b7e504b7f592de61a6880c" 
 ARG build_dependencies="gcc python3-dev libc-dev libffi-dev cargo openssl-dev"
 ARG app_dependencies="findutils nano nano-syntax py3-pip exiftool coreutils tzdata curl libheif imagemagick shadow jq jpeg bind-tools expect inotify-tools msmtp git"
 
