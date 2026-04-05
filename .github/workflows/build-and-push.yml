@@ -49,7 +49,8 @@ jobs:
         with:
           context: .
           file: icloudpd.dockerfile
-          platforms: linux/386,linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6
+          # platforms: linux/386,linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6
+          platforms: linux/amd64
           push: true
           tags: |
             ghcr.io/${{ steps.lowercase.outputs.owner }}/icloudpd:latest
