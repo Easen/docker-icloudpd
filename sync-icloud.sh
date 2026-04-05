@@ -619,7 +619,7 @@ generate_cookie()
    if [ "${authentication_type}" = "MFA" ]
    then
       if [ "$(grep -c "X-APPLE-WEBAUTH-HSA-LOGIN" "/config/${cookie_file}")" -eq 1 ]
-      thenq
+      then
          log_info "Multi-factor authentication cookie generated. Sync should now be successful"
       else
          log_error "Multi-factor authentication information missing from cookie. Authentication has failed"
