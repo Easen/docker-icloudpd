@@ -1,6 +1,8 @@
 FROM alpine:latest
 LABEL maintainer="boredazfcuk"
 
+ARG version="1.0.0"
+
 ENV XDG_DATA_HOME="/config" TZ="UTC" ENV="/etc/profile" config_file="/config/icloudpd.conf"
 
 # https://github.com/icloud-photos-downloader/icloud_photos_downloader/pull/1327
@@ -22,7 +24,7 @@ echo "$(date '+%d/%m/%Y - %H:%M:%S') | Install iCloudPD latest release" && \
    deactivate && \
    apk del build
 
-COPY build_version.txt /opt
+RUN echo "${version}" > /opt/build_version.txt
 COPY --chmod=0755 *.sh /usr/local/bin/
 COPY authenticate.exp /opt/authenticate.exp
 COPY CONFIGURATION.md /opt
