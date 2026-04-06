@@ -1,3 +1,9 @@
+# Forked project - due to iOS 2FA issue
+This is a fork of the original project at https://github.com/boredazfcuk/docker-icloudpd which is using [iCloud Photos Downloader (icloudpd)](https://github.com/icloud-photos-downloader/icloud_photos_downloader) to download photos from iCloud. iCloud Photos Downloader is no longer maintained/looking for a maintainer. 
+
+I have updated the Dockerfile to use the [myMartek's](https://github.com/myMartek) [fork/PR](https://github.com/icloud-photos-downloader/icloud_photos_downloader/pull/1327) that fixes the 2FA issue (iOS 26.4+).
+Once this has been merged into the main branch of icloudpd and boredazfcuk's docker-icloudpd has been updated to use version, I will archive this fork.
+
 # docker-icloudpd
 An Alpine Linux Docker container for iCloud Photos Downloader. I use it for syncing the photo streams of all the iDevices in my house back to my server because it's the only way of backing up multiple devices to a single location. It uses the system keyring to securely store credentials, has HEIC to JPG conversion capability, and can send Telegram, Prowl, Pushover, WebHook, DingTalk, Discord, openhab, IYUU, WeCom, msmtp & Signal notifications. Please note, Apple's Advanced Data Protection (ADP) is not supported. ADP must be disabled for this container to work.
 
