@@ -618,7 +618,7 @@ generate_cookie()
    run_as "/opt/icloudpd/bin/icloudpd --username ${apple_id} --cookie-directory /config --auth-only --domain ${auth_domain}"
    if [ "${authentication_type}" = "MFA" ]
    then
-      if [ "$(grep -c "X-APPLE-WEBAUTH-HSA-LOGIN" "/config/${cookie_file}")" -eq 1 ]
+      if [ "$(grep -c "X-APPLE-WEBAUTH-HSA-TRUST" "/config/${cookie_file}")" -eq 1 ]
       then
          log_info "Multi-factor authentication cookie generated. Sync should now be successful"
       else
@@ -712,7 +712,7 @@ wait_for_authentication()
 {
    local counter
    counter="${counter:=0}"
-   while [ "$(grep -c "X-APPLE-WEBAUTH-HSA-LOGIN" "/config/${cookie_file}" >/dev/null 2>&1 && echo 1 || echo 0)" -eq 0 ]
+   while [ "$(grep -c "X-APPLE-WEBAUTH-HSA-TRUST" "/config/${cookie_file}" >/dev/null 2>&1 && echo 1 || echo 0)" -eq 0 ]
    do
       sleep 5
       counter=$((counter + 1))
@@ -747,7 +747,7 @@ check_multifactor_authentication_cookie()
       wait_for_cookie DisplayMessage
       log_debug "Multi-factor authentication cookie file exists, checking validity..."
    fi
-   if [ "$(grep -c "X-APPLE-DS-WEB-SESSION-TOKEN" "/config/${cookie_file}")" -eq 1 ] && [ "$(grep -c "X-APPLE-WEBAUTH-HSA-LOGIN" "/config/${cookie_file}")" -eq 0 ]
+   if [ "$(grep -c "X-APPLE-DS-WEB-SESSION-TOKEN" "/config/${cookie_file}")" -eq 1 ] && [ "$(grep -c "X-APPLE-WEBAUTH-HSA-TRUST" "/config/${cookie_file}")" -eq 0 ]
    then
       log_debug "Multi-factor authentication cookie exists, but not authenticated. Waiting for authentication to complete..."
       wait_for_authentication
